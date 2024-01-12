@@ -82,6 +82,7 @@ const New = ({ inputs, title }) => {
         timeStamp: serverTimestamp(),
       });
       navigate(-1)
+      await db.collection('users').doc(data.email).set({email: data.email})
     } catch (err) {
       console.log(err);
     }

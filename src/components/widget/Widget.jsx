@@ -11,7 +11,7 @@ import { db } from "../../firebase";
 
 const Widget = ({ type }) => {
   const [amount, setAmount] = useState(null);
-  const [diff, setDiff] = useState(null);
+  const [diff, setDiff] = useState();
   let data;
 
   switch (type) {
@@ -25,7 +25,7 @@ const Widget = ({ type }) => {
           <PersonOutlinedIcon
             className="icon"
             style={{
-              color: "crimson",
+
               backgroundColor: "rgba(255, 0, 0, 0.2)",
             }}
           />
@@ -37,13 +37,12 @@ const Widget = ({ type }) => {
         title: "ORDERS",
         isMoney: false,
         link: "View all orders",
+        query:"orders",
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
             style={{
-              backgroundColor: "rgba(218, 165, 32, 0.2)",
-              color: "goldenrod",
-            }}
+          backgroundColor: "rgba(218, 165, 32, 0.2)", color: "goldenrod",}}
           />
         ),
       };
@@ -61,24 +60,7 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "product":
-      data = {
-        title: "PRODUCTS",
-        query:"products",
-        link: "See details",
-        icon: (
-          <AccountBalanceWalletOutlinedIcon
-            className="icon"
-            style={{
-              backgroundColor: "rgba(128, 0, 128, 0.2)",
-              color: "purple",
-            }}
-          />
-        ),
-      };
-      break;
-    default:
-      break;
+     
   }
 
   useEffect(() => {
@@ -121,8 +103,6 @@ const Widget = ({ type }) => {
       </div>
       <div className="right">
         <div className={`percentage ${diff < 0 ? "negative" : "positive"}`}>
-          {diff < 0 ? <KeyboardArrowDownIcon/> : <KeyboardArrowUpIcon/> }
-          {diff} %
         </div>
         {data.icon}
       </div>
